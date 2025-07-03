@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Strength Workout | FitTrack</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .exercise-card {
+      transition: all 0.2s ease;
+    }
+    .exercise-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .warning-text {
+      color: #ef4444;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    .user-initial {
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+    }
+    .fixed {
+      transition: opacity 0.2s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header remains the same as before -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-dumbbell text-blue-600 text-2xl"></i>
+        <span class="font-bold text-xl text-gray-800">FitTrack</span>
+      </div>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="client-dashboard.html" class="text-gray-600 hover:text-blue-600">Dashboard</a></li>
+          <li><a href="client-tracker.html" class="text-gray-600 hover:text-blue-600">Progress</a></li>
+          <li><a href="client-workouts.html" class="text-blue-600 font-medium">Workouts</a></li>
+          <li><a href="client-nutrition.html" class="text-gray-600 hover:text-blue-600">Nutrition</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="client-profile.html" class="w-8 h-8 rounded-full user-initial flex items-center justify-center">
+          J
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Log Strength Workout</h1>
+        <p class="text-gray-600">Record your reps and weight for each set</p>
+      </div>
+      
+    </div>
+
+    <div id="no-workout-message" class="bg-white rounded-2xl shadow overflow-hidden mb-6 p-6 text-center hidden">
+      <i class="fas fa-dumbbell text-4xl text-gray-300 mb-3"></i>
+      <h3 class="text-xl font-semibold text-gray-700">No workout planned for today</h3>
+    </div>
+
+    <div id="workout-container" class="bg-white rounded-2xl shadow overflow-hidden mb-6">
+      <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800">Coach's Workout Plan</h2>
+      </div>
+      <div class="p-5">
+        <div id="exercises-container" class="space-y-4">
+          <!-- Hack Squat -->
+          <div class="exercise-card border border-gray-200 rounded-xl p-4">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <h3 class="font-medium text-lg">1. Hack Squat <span class="text-sm text-gray-500">(3 sets, 10-20 reps @ RIR 2)</span></h3>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <!-- Set 1 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 1</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Increase weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rir-select">
+                    <option value="">RIR</option>
+                    <option value="1">RIR 1</option>
+                    <option value="2" selected>RIR 2</option>
+                    <option value="3">RIR 3</option>
+                  </select>
+                  <div class="warning-text hidden">Too easy - higher the weight</div>
+                </div>
+              </div>
+              <!-- Set 2 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 2</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Decrease weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rir-select">
+                    <option value="">RIR</option>
+                    <option value="1">RIR 1</option>
+                    <option value="2" selected>RIR 2</option>
+                    <option value="3">RIR 3</option>
+                  </select>
+                  <div class="warning-text hidden">Too hard - decrease weight</div>
+                </div>
+              </div>
+              <!-- Set 3 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 3</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Decrease weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rir-select">
+                    <option value="">RIR</option>
+                    <option value="1">RIR 1</option>
+                    <option value="2" selected>RIR 2</option>
+                    <option value="3">RIR 3</option>
+                  </select>
+                  <div class="warning-text hidden">Too hard - decrease weight</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chest-Supported Row -->
+          <div class="exercise-card border border-gray-200 rounded-xl p-4">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <h3 class="font-medium text-lg">2. Chest-Supported Row <span class="text-sm text-gray-500">(3 sets, 10-20 reps @ RPE 8)</span></h3>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <!-- Set 1 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 1</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Increase weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rpe-select">
+                    <option value="">RPE</option>
+                    <option value="7">RPE 7</option>
+                    <option value="8" selected>RPE 8</option>
+                    <option value="9">RPE 9</option>
+                  </select>
+                  <div class="warning-text hidden">Too easy - higher the weight</div>
+                </div>
+              </div>
+              <!-- Set 2 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 2</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Decrease weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rpe-select">
+                    <option value="">RPE</option>
+                    <option value="7">RPE 7</option>
+                    <option value="8" selected>RPE 8</option>
+                    <option value="9">RPE 9</option>
+                  </select>
+                  <div class="warning-text hidden">Too hard - decrease weight</div>
+                </div>
+              </div>
+              <!-- Set 3 -->
+              <div class="grid grid-cols-4 gap-2 items-center">
+                <span class="text-sm text-gray-500">Set 3</span>
+                <div class="relative">
+                  <input type="number" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Reps">
+                  <div class="warning-text hidden">Decrease weight</div>
+                </div>
+                <div class="relative">
+                  <input type="number" step="0.1" class="w-full border border-gray-200 rounded-lg p-2 text-center" placeholder="Weight">
+                </div>
+                <div class="relative">
+                  <select class="w-full border border-gray-200 rounded-lg p-2 text-center rpe-select">
+                    <option value="">RPE</option>
+                    <option value="7">RPE 7</option>
+                    <option value="8" selected>RPE 8</option>
+                    <option value="9">RPE 9</option>
+                  </select>
+                  <div class="warning-text hidden">Too hard - decrease weight</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end space-x-3">
+      <button class="bg-white border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-50 transition-all font-medium">
+        Cancel
+      </button>
+      <button id="submit-workout" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all font-medium">
+        <i class="fas fa-check-circle mr-2"></i> Submit Workout
+      </button>
+    </div>
+  </main>
+
+  <script>
+    // Submit workout functionality
+    document.getElementById('submit-workout').addEventListener('click', function() {
+      // Immediately show the popup
+      showPRPopup(2); // Passing 2 as example PR count
+    });
+
+    // Function to show PR popup
+    function showPRPopup(prCount) {
+      // Create the popup
+      const popup = document.createElement('div');
+      popup.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      popup.innerHTML = `
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-gray-800">Workout Complete!</h3>
+            <button class="text-gray-500 hover:text-gray-700" onclick="this.closest('div.fixed').remove()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <p class="text-gray-600 mb-4">Your workout has been logged successfully!</p>
+          ${prCount > 0 ? `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+              <div class="flex items-center">
+                <i class="fas fa-trophy text-green-500 mr-3 text-xl"></i>
+                <div>
+                  <h4 class="font-medium text-green-800">You hit ${prCount} new PR${prCount > 1 ? 's' : ''}!</h4>
+                  <p class="text-sm text-green-600 mt-1">Great job pushing your limits!</p>
+                </div>
+              </div>
+            </div>
+          ` : `
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <div class="flex items-center">
+                <i class="fas fa-thumbs-up text-blue-500 mr-3 text-xl"></i>
+                <div>
+                  <h4 class="font-medium text-blue-800">Solid workout!</h4>
+                  <p class="text-sm text-blue-600 mt-1">Keep up the consistency!</p>
+                </div>
+              </div>
+            </div>
+          `}
+          <button 
+            onclick="window.location.href='client-workouts.html'" 
+            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all font-medium"
+          >
+            Back to Workouts
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(popup);
+    }
+
+    // Validation function remains the same
+    function validateSet(setElement) {
+      const exerciseTitle = setElement.closest('.exercise-card').querySelector('h3').textContent;
+      const repMatch = exerciseTitle.match(/\((\d+)-(\d+) reps/);
+      const rirMatch = exerciseTitle.match(/@ RIR (\d+)-?(\d*)/);
+      const rpeMatch = exerciseTitle.match(/@ RPE (\d+)-?(\d*)/);
+      
+      if (!repMatch) return;
+      
+      const minReps = parseInt(repMatch[1]);
+      const maxReps = parseInt(repMatch[2]);
+      const repsInput = setElement.querySelector('input[placeholder="Reps"]');
+      const rirSelect = setElement.querySelector('.rir-select');
+      const rpeSelect = setElement.querySelector('.rpe-select');
+      const repWarning = repsInput.nextElementSibling;
+      const intensityWarning = (rirSelect || rpeSelect)?.nextElementSibling;
+      
+      // Clear previous warnings
+      repWarning.classList.add('hidden');
+      if (intensityWarning) intensityWarning.classList.add('hidden');
+      
+      // Get current values
+      const reps = parseInt(repsInput.value) || 0;
+      const rir = rirSelect ? parseInt(rirSelect.value) || 0 : 0;
+      const rpe = rpeSelect ? parseInt(rpeSelect.value) || 0 : 0;
+      
+      // Validate reps first
+      if (reps > 0) {
+        if (reps < minReps) {
+          repWarning.textContent = "Too few reps - decrease weight";
+          repWarning.classList.remove('hidden');
+        } else if (reps > maxReps) {
+          repWarning.textContent = "Too many reps - increase weight";
+          repWarning.classList.remove('hidden');
+        }
+      }
+      
+      // Validate RIR if prescribed
+      if (rirMatch && rirSelect && rir > 0) {
+        const minRir = parseInt(rirMatch[1]) || 0;
+        const maxRir = parseInt(rirMatch[2]) || minRir;
+        
+        if (rir > maxRir) {
+          intensityWarning.textContent = "Too easy - higher the weight to reach RIR " + minRir + "-" + maxRir;
+          intensityWarning.classList.remove('hidden');
+        } else if (rir < minRir) {
+          intensityWarning.textContent = "Too hard - decrease weight to reach RIR " + minRir + "-" + maxRir;
+          intensityWarning.classList.remove('hidden');
+        }
+      }
+      
+      // Validate RPE if prescribed
+      if (rpeMatch && rpeSelect && rpe > 0) {
+        const minRpe = parseInt(rpeMatch[1]) || 0;
+        const maxRpe = parseInt(rpeMatch[2]) || minRpe;
+        
+        if (rpe < minRpe) {
+          intensityWarning.textContent = "Too easy - higher the weight to reach RPE " + minRpe + "-" + maxRpe;
+          intensityWarning.classList.remove('hidden');
+        } else if (rpe > maxRpe) {
+          intensityWarning.textContent = "Too hard - decrease weight to reach RPE " + minRpe + "-" + maxRpe;
+          intensityWarning.classList.remove('hidden');
+        }
+      }
+    }
+
+    // Add event listeners for validation
+    document.querySelectorAll('.exercise-card').forEach(card => {
+      card.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('change', function() {
+          validateSet(this.closest('.grid'));
+        });
+      });
+    });
+
+    // Date picker functionality
+    document.getElementById('workout-date').addEventListener('change', function() {
+      const noWorkoutMessage = document.getElementById('no-workout-message');
+      const workoutContainer = document.getElementById('workout-container');
+      
+      if (Math.random() > 0.7) {
+        noWorkoutMessage.classList.remove('hidden');
+        workoutContainer.classList.add('hidden');
+      } else {
+        noWorkoutMessage.classList.add('hidden');
+        workoutContainer.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

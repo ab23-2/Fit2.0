@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workouts | FitTrack</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .day-header {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .day-header:hover {
+      background-color: #f3f4f6;
+    }
+    .day-header.active {
+      background-color: #dbeafe;
+      color: #1e40af;
+      font-weight: 500;
+    }
+    .workout-content {
+      display: none;
+    }
+    .workout-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .exercise-item {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .exercise-item:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #3b82f6;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-dumbbell text-blue-600 text-2xl"></i>
+        <span class="font-bold text-xl text-gray-800">FitTrack</span>
+      </div>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="client-dashboard.html" class="text-gray-600 hover:text-blue-600">Dashboard</a></li>
+          <li><a href="client-tracker.html" class="text-gray-600 hover:text-blue-600">Progress</a></li>
+          <li><a href="client-workouts.html" class="text-blue-600 font-medium">Workouts</a></li>
+          <li><a href="client-nutrition.html" class="text-gray-600 hover:text-blue-600">Nutrition</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="client-profile.html" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
+          J
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Workout Plan</h1>
+        <p class="text-gray-600" id="programInfo">Fat Loss Program - Week 2 of 8</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <a href="client-workout-log.html" class="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 transition-all">
+          <i class="fas fa-dumbbell mr-1"></i> Log Workout
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden mb-6">
+      <div class="p-5 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-800">Today's Workout</h2>
+        <p class="text-sm text-gray-600" id="todayDate">Wednesday, March 15</p>
+      </div>
+      <div class="p-5">
+        <div id="todaysWorkout" class="space-y-3">
+          <!-- Will be populated by JavaScript -->
+        </div>
+        <div class="mt-6 flex space-x-3">
+          <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all">
+            <i class="fas fa-check-circle mr-2"></i> Mark Complete
+          </button>
+          <button class="flex-1 bg-gray-100 text-gray-800 py-2 rounded-lg hover:bg-gray-200 transition-all">
+            <i class="fas fa-comment-alt mr-2"></i> Add Notes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden">
+      <div class="p-5 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-800">Weekly Plan</h2>
+      </div>
+      <div class="p-5">
+        <div class="grid grid-cols-7 gap-1 text-center text-sm mb-4">
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('sunday')">Sun</div>
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('monday')">Mon</div>
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('tuesday')">Tue</div>
+          <div class="day-header py-2 font-medium bg-blue-100 text-blue-800 rounded-lg active" onclick="showDayWorkout('wednesday')">Wed</div>
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('thursday')">Thu</div>
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('friday')">Fri</div>
+          <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('saturday')">Sat</div>
+        </div>
+        
+        <!-- Workout Content Areas -->
+        <div id="sunday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+          <p class="text-gray-600 text-center">Rest Day</p>
+        </div>
+        
+        <div id="monday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+          <div class="flex items-center mb-3">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+              <i class="fas fa-running text-blue-600"></i>
+            </div>
+            <div>
+              <h4 class="font-medium">Upper Body Strength</h4>
+              <p class="text-sm text-gray-500">Completed 2 hours ago</p>
+            </div>
+            <div class="ml-auto text-green-600">
+              <i class="fas fa-check-circle"></i>
+            </div>
+          </div>
+          <div id="monday-workout" class="space-y-2">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div id="tuesday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+          <div class="flex items-center mb-3">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mr-3">
+              <i class="fas fa-dumbbell text-purple-600"></i>
+            </div>
+            <div>
+              <h4 class="font-medium">Lower Body Strength</h4>
+              <p class="text-sm text-gray-500">Completed yesterday</p>
+            </div>
+            <div class="ml-auto text-green-600">
+              <i class="fas fa-check-circle"></i>
+            </div>
+          </div>
+          <div id="tuesday-workout" class="space-y-2">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div id="wednesday-content" class="workout-content active p-4 bg-gray-50 rounded-lg mb-3">
+          <div class="flex items-center mb-3">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mr-3">
+              <i class="fas fa-heartbeat text-green-600"></i>
+            </div>
+            <div>
+              <h4 class="font-medium">Full Body Conditioning</h4>
+              <p class="text-sm text-gray-500">Today's workout</p>
+            </div>
+            <div class="ml-auto text-blue-600">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div id="wednesday-workout" class="space-y-2">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div id="thursday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+          <div class="flex items-center mb-3">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-yellow-100 flex items-center justify-center mr-3">
+              <i class="fas fa-dumbbell text-yellow-600"></i>
+            </div>
+            <div>
+              <h4 class="font-medium">Upper Body Hypertrophy</h4>
+            </div>
+          </div>
+          <div id="thursday-workout" class="space-y-2">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div id="friday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+          <p class="text-gray-600 text-center">Active Recovery / Cardio</p>
+        </div>
+        
+        <div id="saturday-content" class="workout-content p-4 bg-gray-50 rounded-lg">
+          <p class="text-gray-600 text-center">Rest Day</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  // Helper functions
+  function calculateCurrentWeek(startDate, endDate) {
+    const start = new Date(startDate);
+    const today = new Date();
+    const end = new Date(endDate);
+    
+    if (today < start) return 0;
+    if (today > end) return Math.floor((end - start) / (7 * 24 * 60 * 60 * 1000));
+    
+    const diffTime = Math.abs(today - start);
+    return Math.floor(diffTime / (7 * 24 * 60 * 60 * 1000)) + 1;
+  }
+
+  function calculateTotalWeeks(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = Math.abs(end - start);
+    return Math.floor(diffTime / (7 * 24 * 60 * 60 * 1000));
+  }
+
+  // Load workout data for the logged in user
+  document.addEventListener('DOMContentLoaded', () => {
+    const userId = localStorage.getItem('userId');
+    const db = JSON.parse(localStorage.getItem('fitTrackData'));
+    const clientData = db.clients[userId];
+    
+    // Display today's date
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', options);
+
+    if (clientData.programs.currentWorkout) {
+      const workoutProgram = clientData.programs.currentWorkout;
+      
+      // Display program info
+      document.getElementById('programInfo').textContent = 
+        `${workoutProgram.name} - Week ${calculateCurrentWeek(workoutProgram.startDate, workoutProgram.endDate)} of ${calculateTotalWeeks(workoutProgram.startDate, workoutProgram.endDate)}`;
+      
+      // Populate today's workout (Wednesday in this example)
+      const todaysWorkoutContainer = document.getElementById('todaysWorkout');
+      const wednesdayWorkout = workoutProgram.workouts.wednesday.split('\n');
+      
+      wednesdayWorkout.forEach(exercise => {
+        if (exercise.trim()) {
+          const exerciseItem = document.createElement('div');
+          exerciseItem.className = 'exercise-item';
+          exerciseItem.textContent = exercise;
+          todaysWorkoutContainer.appendChild(exerciseItem);
+        }
+      });
+
+      // Populate all workout days
+      for (const [day, workout] of Object.entries(workoutProgram.workouts)) {
+        const container = document.getElementById(`${day}-workout`);
+        if (container) {
+          workout.split('\n').forEach(exercise => {
+            if (exercise.trim()) {
+              const exerciseItem = document.createElement('div');
+              exerciseItem.className = 'exercise-item';
+              exerciseItem.textContent = exercise;
+              container.appendChild(exerciseItem);
+            }
+          });
+        }
+      }
+    } else {
+      // Show "No workout program assigned" message
+      document.getElementById('todaysWorkout').innerHTML = `
+        <div class="text-center py-8">
+          <i class="fas fa-dumbbell text-4xl text-gray-300 mb-4"></i>
+          <p class="text-gray-600">No workout program assigned yet.</p>
+          <p class="text-sm text-gray-500 mt-2">Please contact your coach.</p>
+        </div>
+      `;
+    }
+  });
+
+  // Show selected day's workout
+  function showDayWorkout(day) {
+    // Update active day header
+    document.querySelectorAll('.day-header').forEach(header => {
+      header.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+      header.classList.add('text-gray-500');
+    });
+    
+    const activeHeader = document.querySelector(`.day-header[onclick="showDayWorkout('${day}')"]`);
+    activeHeader.classList.add('active', 'bg-blue-100', 'text-blue-800');
+    activeHeader.classList.remove('text-gray-500');
+    
+    // Hide all workout contents
+    document.querySelectorAll('.workout-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    
+    // Show selected workout content
+    document.getElementById(`${day}-content`).classList.add('active');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clients | FitTrack Pro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-dumbbell text-blue-600 text-2xl"></i>
+        <span class="font-bold text-xl text-gray-800">FitTrack <span class="text-blue-600">Pro</span></span>
+      </div>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="coach-dashboard.html" class="text-gray-600 hover:text-blue-600">Dashboard</a></li>
+          <li><a href="coach-clients.html" class="text-blue-600 font-medium">Clients</a></li>
+          <li><a href="coach-programs.html" class="text-gray-600 hover:text-blue-600">Programs</a></li>
+          <li><a href="coach-messages.html" class="text-gray-600 hover:text-blue-600">Messages</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button class="relative text-gray-600 hover:text-blue-600">
+          <i class="fas fa-bell text-xl"></i>
+          <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+        </button>
+        <a href="coach-profile.html" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+          <i class="fas fa-user text-blue-600"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Client Management</h1>
+        <p class="text-gray-600">Manage all your clients in one place</p>
+      </div>
+      <a href="coach-add-client.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all flex items-center">
+        <i class="fas fa-plus mr-2"></i>Add New Client
+      </a>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden mb-6">
+      <div class="p-4 border-b border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
+        <div class="relative w-full md:w-64">
+          <input type="text" placeholder="Search clients..." class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        </div>
+        <div class="flex space-x-2">
+          <select class="border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <option>All Programs</option>
+            <option>Weight Loss</option>
+            <option>Muscle Gain</option>
+            <option>Maintenance</option>
+          </select>
+          <select class="border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <option>All Status</option>
+            <option>On Track</option>
+            <option>Needs Attention</option>
+            <option>New</option>
+          </select>
+          <button class="bg-white border border-gray-300 px-3 py-2 rounded-lg hover:bg-gray-50 transition-all">
+            <i class="fas fa-filter"></i>
+          </button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Check-in</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50 transition-all">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-user text-blue-600"></i>
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">Alex Johnson</div>
+                    <div class="text-sm text-gray-500">alex@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">Weight Loss</div>
+                <div class="text-sm text-gray-500">Started Jan 15</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="w-20 mr-2">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                  </div>
+                  <span class="text-sm font-medium">75%</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">Today, 09:42</div>
+                <div class="text-sm text-gray-500">72.3kg (-0.2kg)</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <a href="coach-client-review.html" class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></a>
+                <a href="#" class="text-green-600 hover:text-green-900 mr-3"><i class="fas fa-edit"></i></a>
+                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+            <!-- More client rows would go here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
+        <div class="text-sm text-gray-700">
+          Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">24</span> clients
+        </div>
+        <div class="flex space-x-2">
+          <button class="px-3 py-1 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+            Previous
+          </button>
+          <button class="px-3 py-1 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Active Clients</h3>
+          <i class="fas fa-users text-blue-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">24</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">New This Month</h3>
+          <i class="fas fa-user-plus text-green-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">5</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Needs Review</h3>
+          <i class="fas fa-exclamation-circle text-yellow-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">3</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Completed Goals</h3>
+          <i class="fas fa-trophy text-purple-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">8</p>
+      </div>
+    </div>
+    <!-- In client-workouts.html, replace the workout content sections with this dynamic version -->
+<div class="bg-white rounded-2xl shadow overflow-hidden">
+  <div class="p-5 border-b border-gray-200">
+    <h2 class="text-xl font-semibold text-gray-800">Weekly Plan</h2>
+    <p class="text-sm text-gray-600" id="programInfo">Program: <span id="programName">Fat Loss Program</span> (Duration: <span id="programDuration">8 weeks</span>)</p>
+  </div>
+  <div class="p-5">
+    <div class="grid grid-cols-7 gap-1 text-center text-sm mb-4">
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('sunday')">Sun</div>
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('monday')">Mon</div>
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('tuesday')">Tue</div>
+      <div class="day-header py-2 font-medium bg-blue-100 text-blue-800 rounded-lg active" onclick="showDayWorkout('wednesday')">Wed</div>
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('thursday')">Thu</div>
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('friday')">Fri</div>
+      <div class="day-header py-2 text-gray-500" onclick="showDayWorkout('saturday')">Sat</div>
+    </div>
+    
+    <!-- Workout Content Areas would be dynamically populated from the coach's program -->
+    <div id="sunday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+      <p class="text-gray-600 text-center">Rest Day</p>
+    </div>
+    
+    <div id="monday-content" class="workout-content p-4 bg-gray-50 rounded-lg mb-3">
+      <div class="flex items-center mb-3">
+        <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
+          <i class="fas fa-running text-blue-600"></i>
+        </div>
+        <div>
+          <h4 class="font-medium">Upper Body Strength</h4>
+        </div>
+      </div>
+      <p class="font-mono whitespace-pre-line" id="monday-workout">Loading workout details...</p>
+    </div>
+    
+    <!-- Similar structure for other days -->
+  </div>
+</div>
+
+<script>
+  // In a real app, this would fetch the assigned program from your backend
+  function loadAssignedProgram() {
+    // This is mock data - replace with actual API call
+    const programData = {
+      name: "Fat Loss Program",
+      duration: "8 weeks",
+      days: {
+        monday: "Bench Press - 3x5 RPE 7\nIncline DB Press - 3x8-12\nLat Pulldown - 3x8-12",
+        tuesday: "Deadlift - 3x3 RPE 7\nRDL - 3x6-8\nLeg Press - 3x8-12",
+        wednesday: "Comp Squat - 2x3 RPE 7\nFront Squat - 2x6-8 rir 1-2",
+        thursday: "OHP - 3x5 RPE 7\nLateral Raises - 3x12-15",
+        friday: "Rest Day",
+        saturday: "Optional Cardio",
+        sunday: "Rest Day"
+      },
+      nutrition: {
+        calories: 2100,
+        protein: 150,
+        carbs: 200,
+        fats: 70
+      }
+    };
+
+    // Update UI with program data
+    document.getElementById('programName').textContent = programData.name;
+    document.getElementById('programDuration').textContent = programData.duration;
+    
+    // Update workout days
+    for (const [day, workout] of Object.entries(programData.days)) {
+      const contentDiv = document.getElementById(`${day}-content`);
+      if (contentDiv) {
+        const workoutText = contentDiv.querySelector('.font-mono');
+        if (workoutText) {
+          workoutText.textContent = workout;
+        }
+      }
+    }
+  }
+
+  // Load program when page loads
+  document.addEventListener('DOMContentLoaded', loadAssignedProgram);
+</script>
+  </main>
+</body>
+</html>

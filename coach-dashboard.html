@@ -1,0 +1,184 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Dashboard | FitTrack Pro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-dumbbell text-blue-600 text-2xl"></i>
+        <span class="font-bold text-xl text-gray-800">FitTrack <span class="text-blue-600">Pro</span></span>
+      </div>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="coach-dashboard.html" class="text-blue-600 font-medium">Dashboard</a></li>
+          <li><a href="coach-clients.html" class="text-gray-600 hover:text-blue-600">Clients</a></li>
+          <li><a href="coach-programs.html" class="text-gray-600 hover:text-blue-600">Programs</a></li>
+          <li><a href="coach-messages.html" class="text-gray-600 hover:text-blue-600">Messages</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button class="relative text-gray-600 hover:text-blue-600">
+          <i class="fas fa-bell text-xl"></i>
+          <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+          <i class="fas fa-user text-blue-600"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Coach Dashboard</h1>
+      <div class="flex space-x-3">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
+          <i class="fas fa-plus mr-2"></i>New Client
+        </button>
+        <button class="bg-white border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all">
+          <i class="fas fa-download mr-2"></i>Export
+        </button>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3 mb-8">
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Active Clients</h3>
+          <i class="fas fa-users text-blue-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">24</p>
+        <p class="text-sm text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 3 new this week</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Pending Actions</h3>
+          <i class="fas fa-tasks text-yellow-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">8</p>
+        <p class="text-sm text-gray-600 mt-1">Reviews & Messages</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-600">Client Progress</h3>
+          <i class="fas fa-chart-line text-green-500 text-xl"></i>
+        </div>
+        <p class="text-3xl font-bold mt-2">86%</p>
+        <p class="text-sm text-gray-600 mt-1">On track with goals</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow overflow-hidden mb-8">
+      <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-800">Recent Client Activity</h2>
+        <a href="#" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Check-in</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr class="hover:bg-gray-50 transition-all">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-user text-blue-600"></i>
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">Alex Johnson</div>
+                    <div class="text-sm text-gray-500">Weight Loss</div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">Today, 09:42</div>
+                <div class="text-sm text-gray-500">72.3kg (-0.2kg)</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                </div>
+                <div class="text-xs text-gray-500 mt-1">75% to goal</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                  On Track
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <a href="coach-client-review.html" class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-comment-alt"></i></a>
+                <a href="#" class="text-green-600 hover:text-green-900 mr-3"><i class="fas fa-edit"></i></a>
+                <a href="#" class="text-purple-600 hover:text-purple-900"><i class="fas fa-chart-line"></i></a>
+              </td>
+            </tr>
+            <!-- More client rows would go here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-gray-800">Quick Messages</h2>
+          <a href="coach-messages.html" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start p-3 bg-blue-50 rounded-lg">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+              <i class="fas fa-user text-blue-600"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between items-start">
+                <h4 class="font-medium">Sarah Williams</h4>
+                <span class="text-xs text-gray-500">10 min ago</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Coach, should I increase my protein intake?</p>
+              <div class="mt-2">
+                <button class="text-xs bg-white px-2 py-1 rounded border border-gray-300 hover:bg-gray-50">Reply</button>
+              </div>
+            </div>
+          </div>
+          <!-- More message previews would go here -->
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-md transition-all">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-gray-800">Upcoming Reviews</h2>
+          <a href="#" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-all">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                <i class="fas fa-user text-purple-600"></i>
+              </div>
+              <div>
+                <h4 class="font-medium">Michael Brown</h4>
+                <p class="text-sm text-gray-600">Diet Plan Review</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-sm font-medium">Tomorrow</p>
+              <button class="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 mt-1">Prepare</button>
+            </div>
+          </div>
+          <!-- More review items would go here -->
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

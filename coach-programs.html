@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs | FitTrack Pro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .program-modal {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .hidden {
+      display: none;
+    }
+    .floating-label {
+      transition: all 0.2s ease;
+    }
+    input:focus + .floating-label,
+    input:not(:placeholder-shown) + .floating-label,
+    select:focus + .floating-label,
+    select:not(:placeholder-shown) + .floating-label {
+      transform: translateY(-1.5rem) scale(0.85);
+      color: #3b82f6;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-dumbbell text-blue-600 text-2xl"></i>
+        <span class="font-bold text-xl text-gray-800">FitTrack <span class="text-blue-600">Pro</span></span>
+      </div>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="coach-dashboard.html" class="text-gray-600 hover:text-blue-600">Dashboard</a></li>
+          <li><a href="coach-clients.html" class="text-gray-600 hover:text-blue-600">Clients</a></li>
+          <li><a href="coach-programs.html" class="text-blue-600 font-medium">Programs</a></li>
+          <li><a href="coach-messages.html" class="text-gray-600 hover:text-blue-600">Messages</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="coach-profile.html" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">J</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Program Library</h1>
+        <p class="text-gray-600">Manage your training and nutrition programs</p>
+      </div>
+      <button id="createProgramBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
+        <i class="fas fa-plus mr-2"></i>Create Program
+      </button>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      <!-- Existing program cards would go here -->
+    </div>
+
+    <!-- Program Creation Modal -->
+    <div id="programModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md program-modal">
+        <div class="p-4 border-b border-gray-200 sticky top-0 bg-white">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-semibold">Create New Program</h2>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="p-4">
+          <form id="programForm">
+            <!-- Program Basics -->
+            <div class="mb-6">
+              <div class="relative mb-4">
+                <input type="text" id="programName" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" " required>
+                <label for="programName" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Program Name*</label>
+              </div>
+              
+              <div class="relative mb-4">
+                <select id="programType" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" required>
+                  <option value="" disabled selected></option>
+                  <option value="diet">Diet Plan</option>
+                  <option value="workout">Workout Plan</option>
+                </select>
+                <label for="programType" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Program Type*</label>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="relative">
+                  <input type="date" id="startDate" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" required>
+                  <label for="startDate" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Start Date*</label>
+                </div>
+                <div class="relative">
+                  <input type="date" id="endDate" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" required>
+                  <label for="endDate" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">End Date*</label>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Assign to Clients*</label>
+                <div class="border border-gray-200 rounded-md p-3 max-h-32 overflow-y-auto">
+                  <div class="space-y-2">
+                    <div class="flex items-center">
+                      <input type="checkbox" id="client1" name="clients" value="john-smith" class="mr-2 rounded text-blue-600">
+                      <label for="client1">John Smith</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="client2" name="clients" value="sarah-johnson" class="mr-2 rounded text-blue-600">
+                      <label for="client2">Sarah Johnson</label>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="checkbox" id="client3" name="clients" value="michael-brown" class="mr-2 rounded text-blue-600">
+                      <label for="client3">Michael Brown</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Diet Plan Form (Hidden by default) -->
+            <div id="dietForm" class="hidden mb-6">
+              <h3 class="font-medium text-gray-800 mb-3">Nutrition Plan</h3>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="relative">
+                  <input type="number" id="calories" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" ">
+                  <label for="calories" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Calories</label>
+                </div>
+                <div class="relative">
+                  <input type="number" id="protein" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" ">
+                  <label for="protein" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Protein (g)</label>
+                </div>
+                <div class="relative">
+                  <input type="number" id="carbs" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" ">
+                  <label for="carbs" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Carbs (g)</label>
+                </div>
+                <div class="relative">
+                  <input type="number" id="fats" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" ">
+                  <label for="fats" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Fats (g)</label>
+                </div>
+                <div class="relative col-span-2">
+                  <input type="number" id="water" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500" placeholder=" " step="0.1">
+                  <label for="water" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Water (liters)</label>
+                </div>
+              </div>
+              <div class="relative">
+                <textarea id="dietNotes" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 h-24" placeholder=" "></textarea>
+                <label for="dietNotes" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Nutrition Notes</label>
+              </div>
+            </div>
+            
+            <!-- Workout Plan Form (Hidden by default) -->
+            <div id="workoutForm" class="hidden mb-6">
+              <h3 class="font-medium text-gray-800 mb-3">Workout Plan</h3>
+              <div id="exerciseContainer" class="space-y-3 mb-4">
+                <!-- Exercises will be added here -->
+              </div>
+              <button id="addExercise" type="button" class="text-blue-600 text-sm flex items-center mb-4">
+                <i class="fas fa-plus mr-1"></i> Add Exercise
+              </button>
+              
+              <div class="relative">
+                <textarea id="workoutNotes" class="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-500 h-24" placeholder=" "></textarea>
+                <label for="workoutNotes" class="floating-label absolute left-3 top-3 text-gray-500 bg-white px-1">Workout Notes</label>
+              </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+              <button type="button" id="cancelModal" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Create Program
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-6 text-center">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+            <i class="fas fa-check text-green-600"></i>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">Program Created Successfully!</h3>
+          <p class="text-sm text-gray-500 mb-4" id="successMessage"></p>
+          <div class="flex justify-center space-x-3">
+            <button id="viewClientsBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              View Clients
+            </button>
+            <button id="closeSuccessModal" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Exercise Template (Hidden) -->
+  <template id="exerciseTemplate">
+    <div class="exercise-item border border-gray-200 rounded-md p-4">
+      <div class="flex justify-between items-start mb-3">
+        <div class="relative flex-1 mr-2">
+          <input type="text" class="exercise-name w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" placeholder="Exercise name" required>
+        </div>
+        <button type="button" class="remove-exercise text-red-500 hover:text-red-700">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+        <div class="relative">
+          <input type="number" class="w-full border border-gray-300 rounded-md p-2 text-center" placeholder="Sets" min="1" required>
+        </div>
+        <div class="relative">
+          <input type="number" class="w-full border border-gray-300 rounded-md p-2 text-center" placeholder="Reps" min="1" required>
+        </div>
+        <div class="relative">
+          <input type="number" step="0.1" class="w-full border border-gray-300 rounded-md p-2 text-center" placeholder="Weight">
+        </div>
+      </div>
+    </div>
+  </template>
+
+<script>
+  // DOM Elements
+  const modal = document.getElementById('programModal');
+  const createBtn = document.getElementById('createProgramBtn');
+  const closeBtn = document.getElementById('closeModal');
+  const cancelBtn = document.getElementById('cancelModal');
+  const programType = document.getElementById('programType');
+  const dietForm = document.getElementById('dietForm');
+  const workoutForm = document.getElementById('workoutForm');
+  const exerciseContainer = document.getElementById('exerciseContainer');
+  const addExerciseBtn = document.getElementById('addExercise');
+  const exerciseTemplate = document.getElementById('exerciseTemplate');
+  const programForm = document.getElementById('programForm');
+  const successModal = document.getElementById('successModal');
+  const closeSuccessModal = document.getElementById('closeSuccessModal');
+  const viewClientsBtn = document.getElementById('viewClientsBtn');
+  const successMessage = document.getElementById('successMessage');
+
+  // Store selected clients for success modal
+  let selectedClients = [];
+
+  // Modal Functions
+  function openModal() {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    programForm.reset();
+    programType.value = '';
+    dietForm.classList.add('hidden');
+    workoutForm.classList.add('hidden');
+    while (exerciseContainer.children.length > 0) {
+      exerciseContainer.removeChild(exerciseContainer.firstChild);
+    }
+    addExercise();
+  }
+
+  function openSuccessModal() {
+    successModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSuccessModalFunc() {
+    successModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Program Type Selection
+  programType.addEventListener('change', (e) => {
+    if (e.target.value === 'diet') {
+      dietForm.classList.remove('hidden');
+      workoutForm.classList.add('hidden');
+    } else if (e.target.value === 'workout') {
+      workoutForm.classList.remove('hidden');
+      dietForm.classList.add('hidden');
+    } else {
+      dietForm.classList.add('hidden');
+      workoutForm.classList.add('hidden');
+    }
+  });
+
+  // Add Exercise
+  function addExercise() {
+    const newExercise = exerciseTemplate.content.cloneNode(true);
+    const removeBtn = newExercise.querySelector('.remove-exercise');
+    
+    removeBtn.addEventListener('click', () => {
+      if (exerciseContainer.children.length > 1) {
+        newExercise.querySelector('.exercise-item').remove();
+      }
+    });
+    
+    exerciseContainer.appendChild(newExercise);
+  }
+
+  // Form Submission
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = {
+      name: document.getElementById('programName').value,
+      type: document.getElementById('programType').value,
+      startDate: document.getElementById('startDate').value,
+      endDate: document.getElementById('endDate').value,
+      clients: Array.from(document.querySelectorAll('input[name="clients"]:checked')).map(cb => ({
+        id: cb.value,
+        name: cb.nextElementSibling.textContent
+      })),
+      nutrition: {
+        calories: document.getElementById('calories').value,
+        protein: document.getElementById('protein').value,
+        carbs: document.getElementById('carbs').value,
+        fats: document.getElementById('fats').value,
+        water: document.getElementById('water').value,
+        notes: document.getElementById('dietNotes').value
+      },
+      workouts: []
+    };
+
+    // Store selected clients for success modal
+    selectedClients = formData.clients;
+
+    // Get workout data if workout program
+    if (formData.type === 'workout') {
+      document.querySelectorAll('.exercise-item').forEach(exercise => {
+        formData.workouts.push({
+          name: exercise.querySelector('.exercise-name').value,
+          sets: exercise.querySelector('input[placeholder="Sets"]').value,
+          reps: exercise.querySelector('input[placeholder="Reps"]').value,
+          weight: exercise.querySelector('input[placeholder="Weight"]').value
+        });
+      });
+      formData.workoutNotes = document.getElementById('workoutNotes').value;
+    }
+
+    // Save to database
+    const db = JSON.parse(localStorage.getItem('fitTrackData'));
+    
+    formData.clients.forEach(client => {
+      if (formData.type === 'diet') {
+        db.clients[client.id].programs.currentNutrition = formData;
+      } else {
+        db.clients[client.id].programs.currentWorkout = formData;
+      }
+    });
+
+    localStorage.setItem('fitTrackData', JSON.stringify(db));
+    
+    // Show success message
+    const programTypeName = formData.type === 'diet' ? 'Diet Plan' : 'Workout Plan';
+    successMessage.textContent = `Your ${programTypeName} has been created and assigned to ${formData.clients.length} client(s).`;
+    
+    closeModal();
+    openSuccessModal();
+  }
+
+  // View Clients button handler
+  viewClientsBtn.addEventListener('click', () => {
+    const clientNames = selectedClients.map(client => client.name).join(', ');
+    alert(`Program assigned to: ${clientNames}`);
+    closeSuccessModalFunc();
+  });
+
+  // Event Listeners
+  createBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  addExerciseBtn.addEventListener('click', addExercise);
+  programForm.addEventListener('submit', handleFormSubmit);
+  closeSuccessModal.addEventListener('click', closeSuccessModalFunc);
+
+  // Close modals when clicking outside
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+    if (e.target === successModal) {
+      closeSuccessModalFunc();
+    }
+  });
+
+  // Initialize with one workout day
+  addExercise();
+</script>
+</body>
+</html>
